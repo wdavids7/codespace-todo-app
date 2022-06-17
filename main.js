@@ -2,6 +2,7 @@
 const todoInput = document.querySelector(".todo-input");
 const todoButton = document.querySelector(".todo-button");
 const todoList = document.querySelector(".todo-list");
+const filterOption = document.querySelector(".filter-todo");
 
 
 
@@ -9,6 +10,7 @@ const todoList = document.querySelector(".todo-list");
 document.addEventListener("DOMContentLoaded", getTodos);
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteCheck);
+filterOption.addEventListener("click", filterTodo);
 
     
 
@@ -26,11 +28,19 @@ function addTodo(event){
     todoDiv.appendChild(newTodo);
     // ADD TODO TO LOCALSTORAGE
     saveLocaltodos(todoInput.value);
+
     // CHECK MARK BUTTON
     const completedButton = document.createElement('button');
     completedButton.innerHTML = '<i class="fas fa-check"></i>';
     completedButton.classList.add("complete-btn");
     todoDiv.appendChild(completedButton);
+
+    // EDIT BUTTON
+    const editButton = document.createElement('button');
+    editButton.innerHTML = '<i class="fas fa-edit"></i>';
+    editButton.classList.add("edit-btn");
+    todoDiv.appendChild(editButton);
+
     // CHECK DELETE BUTTON
     const deleteButton = document.createElement('button');
     deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
@@ -56,6 +66,37 @@ function deleteCheck(e){
         const todo = item.parentElement;
         todo.classList.toggle("completed");
     }
+
+    // EDIT TODO
+    if(item.classList[0] === "edit-btn"){
+        const todo = item.parentElement;
+        todo.classList.toggle("edit");
+    }
+}
+
+function filterTodo(e){
+    const todos = todoList.childNodes;
+    todos.forEach(function(todo){
+        switch(e.target.value){
+            case "all":
+                todo.style.display = 'flex';
+                break;
+            case "completed":
+                if(todo.classList.contains("completed")){todo.style.display = 'flex';
+            }else{
+                todo.style.display = "none";
+            }
+                break;
+            case "pending":
+                if(!todo.classList.contains("completed")){
+                todo.style.display = 'flex';
+            }else{
+                todo.style.display = "none";
+            }
+                break;
+        }
+
+    });
 }
 
 function saveLocaltodos(todo){
@@ -93,6 +134,13 @@ function getTodos(){
             completedButton.innerHTML = '<i class="fas fa-check"></i>';
             completedButton.classList.add("complete-btn");
             todoDiv.appendChild(completedButton);
+
+            // EDIT BUTTON
+            const editButton = document.createElement('button');
+            editButton.innerHTML = '<i class="fas fa-edit"></i>';
+            editButton.classList.add("edit-btn");
+            todoDiv.appendChild(editButton);
+
             // CHECK DELETE BUTTON
             const deleteButton = document.createElement('button');
             deleteButton.innerHTML = '<i class="fas fa-trash"></i>';

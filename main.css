@@ -79,7 +79,8 @@ form button:hover {
 }
 
 .delete-btn,
-.complete-btn {
+.complete-btn,
+.edit-btn {
   color: white;
   border: none;
   padding: 1rem;
@@ -91,17 +92,25 @@ form button:hover {
   background: #344758;
 }
 
+.complete-btn:hover {
+  background: #062c4d;
+  color: white;
+}
+
+.edit-btn {
+  background: #7a838b;
+}
+
+.edit-btn:hover {
+  background: #6c747c;
+  color: white;
+}
 .delete-btn {
   background: crimson;
 }
 
 .delete-btn:hover {
   background: rgb(194, 3, 42);
-  color: white;
-}
-
-.complete-btn:hover {
-  background: #062c4d;
   color: white;
 }
 
@@ -117,4 +126,38 @@ form button:hover {
 .completed {
   text-decoration: line-through;
   opacity: 0.5;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border: none;
+  color: #6c747c;
+  width: 10rem;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.select {
+  margin: 1rem;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.select:hover {
+  color: crimson;
+}
+
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  background: #062c4d;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  pointer-events: none;
+  transition: all 0.3s ease;
 }
